@@ -1,18 +1,51 @@
-class Solution {
+class Solution
+{
 public:
-    ListNode* deleteDuplicates(ListNode* head) {
+    ListNode* deleteDuplicates(ListNode* head)
+    {
         if (!head) return 0;
         if (!head->next) return head;
 
         int val = head->val;
         ListNode* p = head->next;
 
-        if (p->val != val) {
+        if (p->val != val)
+        {
             head->next = deleteDuplicates(p);
             return head;
-        } else {
+        }
+        else
+        {
             while (p && p->val == val) p = p->next;
             return deleteDuplicates(p);
         }
+    }
+};
+
+
+class Solution
+{
+public:
+    ListNode *deleteDuplicates(ListNode *head)
+    {
+        ListNode **runner = &head;
+
+        if(!head || !head->next)return head;
+
+        while(*runner)
+        {
+            if((*runner)->next && (*runner)->next->val == (*runner)->val)
+            {
+                ListNode *temp = *runner;
+                while(temp && (*runner)->val == temp->val)
+                    temp = temp->next;
+
+                *runner = temp;
+            }
+            else
+                runner = &((*runner)->next);
+        }
+
+        return head;
     }
 };
