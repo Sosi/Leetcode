@@ -1,3 +1,21 @@
+// unordered_map hash
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        unordered_map<int,int> M;
+        for(int i = 0; i< nums.size(); i++)
+        {
+            if(M.find(target - nums[i]) == M.end())
+                M[nums[i]] = i;
+            else
+                return {M[target - nums[i]],i};
+        }
+        return vector<int>();
+    }
+};
+
+
+// sort
 class Solution {
 public:
     vector<int> twoSum(vector<int>& nums, int target) {

@@ -3,17 +3,15 @@ class Solution
 public:
     int lengthOfLongestSubstring(string s)
     {
-        // for ASCII char sequence, use this as a hashmap
-        vector<int> charIndex(256, -1);
-        int longest = 0, m = 0;
-
-        for (int i = 0; i < s.length(); i++)
+        unordered_map<char, int> Hash;
+        int ret  = 0, cur = -1;
+        for(int i = 0; i< s.size(); i++)
         {
-            m = max(charIndex[s[i]] + 1, m);    // automatically takes care of -1 case
-            charIndex[s[i]] = i;
-            longest = max(longest, i - m + 1);
+            if(Hash.find(s[i]) != Hash.end())
+                cur = max(Hash[s[i]],cur);
+            ret = max(ret, i - cur);
+            Hash[s[i]] = i;
         }
-
-        return longest;
+        return ret;
     }
 };
